@@ -12,7 +12,8 @@
  ****************************************/
 
 const char * TOKEN = "BBFF-gSjxQK0S9ujN0Ol0MA1zbtQHDyGTpK";
-int status = WL_IDLE_STATUS;
+const char * SSID = "UBIWIFI";
+const char * PASSWORD = "clave123456789ubi";
 
 Ubidots ubidots(TOKEN, UBI_HTTP);
 
@@ -29,17 +30,9 @@ Ubidots ubidots(TOKEN, UBI_HTTP);
 
 void setup() {
   Serial.begin(115200);
-  Serial.println("Attempting to connect to WPA network...");
-  Serial.print("SSID: ");
-  Serial.println("UBIWIFI");
-
-  status = WiFi.begin("UBIWIFI", "clave123456789ubi");
-  if ( status != WL_CONNECTED) { 
-    Serial.println("Couldn't get a wifi connection");
-    // don't do anything else:
-    while(true);
-  } 
   ubidots.setDebug(true);  // Uncomment this line for printing debug messages
+  ubidots.init(SSID, PASSWORD);
+
 }
 
 
